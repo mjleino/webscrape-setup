@@ -31,13 +31,14 @@ request({ uri: "http://viiksipojat.fi" }, function (error, response, body) {
   }
   jsdom.env({
     html: body,
-    scripts: ["jquery.min.js"]
-  }, function (err, window) {
+    scripts: ["jquery.min.js"],
+    done: function (err, window) {
 // --------------
 // THE BEEF
 var $ = window.jQuery;
-console.log(\$('body').html());
+console.log($('body').html());
 // --------------
+    }
   });
 });
 EXAMPLESCRIPT
