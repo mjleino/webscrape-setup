@@ -22,7 +22,7 @@ command -v npm >/dev/null 2>&1 || {
 
 npm install jsdom request
 curl -O http://code.jquery.com/jquery.min.js
-cat >example.js <<EXAMPLESCRIPT
+cat >example.js <<"EXAMPLESCRIPT"
 var request = require('request'),
     jsdom = require('jsdom')
 
