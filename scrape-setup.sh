@@ -24,23 +24,23 @@ npm install jsdom request
 curl -O http://code.jquery.com/jquery.min.js
 cat >example.js <<EXAMPLESCRIPT
 var request = require('request'),
-    jsdom = require('jsdom');
-request({ uri: "http://viiksipojat.fi" }, function (error, response, body) {
-  if (error && response.statusCode !== 200) {
-    console.log('Oops, error.')
-  }
-  jsdom.env({
-    html: body,
-    scripts: ["jquery.min.js"],
-    done: function (err, window) {
-// --------------
-// THE BEEF
-var $ = window.jQuery;
-console.log($('body').html());
-// --------------
-    }
-  });
-});
+    jsdom = require('jsdom')
+
+var boomboomboom = function(err, window) { // THIS IS THE BEEF
+  var $ = window.jQuery
+  console.log($('body').html())
+}
+
+request("http://viiksipojat.fi", function (error, response, body) {
+  if (error || response.statusCode !== 200) 
+    console.log('Oops.')
+  else
+    jsdom.env({
+      html:    body,
+      scripts: ["jquery.min.js"],
+      done:    boomboomboom
+    })
+})
 EXAMPLESCRIPT
 
 echo your beautiful webscraping environment is ready at $(pwd)
